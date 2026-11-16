@@ -72,9 +72,11 @@
     @org.bukkit.event.EventHandler <methods>;
 }
 
-# Standard enum contract: keep the synthetic values()/valueOf so any reflective
+# Standard enum contract: keep values()/valueOf AND the constant names, so Enum.valueOf("STACK")
+# from config works after obfuscation (allowshrinking let ProGuard drop values() and rename constants). Was:
 # enum access (ours or a library's) still resolves after renaming.
--keepclassmembers,allowshrinking enum * {
+-keepclassmembers enum * {
     public static **[] values();
     public static ** valueOf(java.lang.String);
+    <fields>;
 }
