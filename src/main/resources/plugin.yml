@@ -1,0 +1,17 @@
+name: PregenBar
+version: '${version}'
+main: net.byebye.pregenBar.PregenBar
+api-version: '1.21'
+author: byebye_gg
+description: Chunk pre-generator with a live boss bar (percent, chunks/s, ETA), TPS guard and resume after restart.
+folia-supported: false
+commands:
+  pregen:
+    description: Pre-generate chunks.
+    usage: /<command> start <world> <radius> [centerX centerZ] | pause|resume|cancel|status [world] | bar | reload
+    aliases: [pregenbar]
+    permission: pregenbar.admin
+permissions:
+  pregenbar.admin:
+    description: Use /pregen and see the progress boss bar.
+    default: op

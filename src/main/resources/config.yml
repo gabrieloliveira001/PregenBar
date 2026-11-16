@@ -1,0 +1,63 @@
+# PregenBar by byebye_gg (free).
+# Colours: & codes and &#RRGGBB hex. Set any message to '' to hide it.
+
+generation:
+  # Paper/Purpur: chunks generated at the same time (World#getChunkAtAsync).
+  # Spigot has no async API: there it is always one chunk per tick, slowed further by the TPS guard.
+  max-concurrent: 16
+  # TPS guard: below this the allowed concurrency halves every 2 s (down to 1, or one sync chunk
+  # every 20 ticks), above it it climbs back by 10% of max-concurrent every 2 s.
+  # TPS is measured by the plugin itself over the last 2 s.
+  min-tps: 18.0
+  # Already generated chunks are skipped (World#isChunkGenerated) and count as done.
+  skip-generated: true
+  # Chunks whose centre is outside the world border are skipped.
+  respect-world-border: true
+  # square or circle (default shape when /pregen start has none).
+  shape: square
+  # Biggest radius /pregen start accepts, in blocks.
+  max-radius: 100000
+  # Per-tick limits for the skip checks, so a mostly-generated world never stalls a tick.
+  tick-budget-ms: 5
+  max-checks-per-tick: 400
+  # Progress is written to progress.yml this often (and on every start/pause/resume/cancel/finish).
+  save-interval-seconds: 30
+  # After a restart, unfinished tasks continue on their own (paused ones stay paused).
+  auto-resume: true
+  resume-delay-seconds: 10
+  # Console line at 10%, 20%, ... 90%.
+  log-every-10-percent: true
+
+boss-bar:
+  # Shown to online players with pregenbar.admin (/pregen bar hides it for you).
+  # %world% %percent% %rate% %eta% %processed% %total% %generated% %skipped%
+  title: '&bPregen &f%world% &8| &f%percent%% &8| &f%rate% &7chunks/s &8| &7ETA &f%eta%'
+  paused-title: '&ePregen &f%world% &8| &f%percent%% &8| &e&lPAUSED'
+  waiting-title: '&7Pregen &f%world% &8| &7waiting for the world to load'
+  # PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE
+  color: BLUE
+  # SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20
+  style: SEGMENTED_10
+
+messages:
+  prefix: '&b&lPREGEN &8» &7'
+  started: '%prefix%Started &f%world% &7radius &f%radius% &7around &f%x%, %z% &7(&f%total% &7chunks, %mode%).'
+  paused: '%prefix%Paused &f%world%&7.'
+  resumed: '%prefix%Resumed &f%world%&7.'
+  cancelled: '%prefix%Cancelled &f%world%&7. Chunks generated so far stay.'
+  finished: '%prefix%&aPre-generation of &f%world% &afinished: &f%generated% &agenerated, &f%skipped% &askipped.'
+  status: '%prefix%&f%world% &8- &f%percent%% &7(%processed%/%total%) &8| &f%rate% &7chunks/s &8| &7ETA &f%eta% &8| &7%state%'
+  status-detail: '&7  generated &f%generated%&7, skipped &f%skipped%&7, in flight &f%inflight%&7, limit &f%limit%&7, TPS &f%tps% &7(%mode%)'
+  no-tasks: '%prefix%No pre-generation is running.'
+  no-task: '%prefix%&cNo task for &f%world%&c.'
+  which-world: '%prefix%&cSeveral tasks are running; name the world.'
+  unknown-world: '%prefix%&cUnknown world &f%world%&c.'
+  already-running: '%prefix%&cA task for &f%world% &calready exists. Cancel it first.'
+  bad-radius: '%prefix%&cRadius must be between 1 and %max% blocks.'
+  bad-center: '%prefix%&cInvalid center coordinates.'
+  bar-hidden: '%prefix%Boss bar hidden.'
+  bar-shown: '%prefix%Boss bar shown.'
+  players-only: '%prefix%&cOnly players can toggle the boss bar.'
+  reloaded: '%prefix%&aConfig reloaded.'
+  no-permission: '%prefix%&cYou do not have permission.'
+  usage: '%prefix%Usage: /%label% start <world> <radius> [centerX centerZ] [square|circle] &8| &7pause|resume|cancel|status [world] &8| &7bar &8| &7reload'
