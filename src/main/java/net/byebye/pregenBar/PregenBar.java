@@ -48,7 +48,7 @@ import java.util.concurrent.TimeUnit;
 public final class PregenBar extends JavaPlugin implements TabCompleter, Listener {
 
     // TODO: register the plugin at https://bstats.org/ and put its id here. 0 = bStats off.
-    private static final int BSTATS_ID = 0;
+    private static final int BSTATS_ID = 35389;
     private static final String PERM = "pregenbar.admin";
 
     private final Map<String, PregenTask> tasks = new LinkedHashMap<>();
